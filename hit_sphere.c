@@ -75,6 +75,7 @@ t_bool	hit_plain(t_object *pl, t_ray *ray, t_hit_record *rec)
 		rec->normal = vmult(vunit(pl2->normal), -1);
 	else
 		rec->normal = vunit(pl2->normal);
+	rec->p = vplus(rec->p, vmult(rec->normal, EPSILON));
 	return (TRUE);	
 }
 
@@ -130,6 +131,7 @@ t_bool	hit_cylinder_cap(t_object *cy, t_ray *ray, t_hit_record *rec, double heig
 	rec->normal = vunit(cy2->normal);
 	set_face_normal(ray, rec);
 	rec->albedo = cy->albedo;// temp;
+	rec->p = vplus(rec->p, vmult(rec->normal, EPSILON));
 	return (TRUE);
 }
 
@@ -170,5 +172,6 @@ t_bool	hit_cylinder(t_object *cy, t_ray *ray, t_hit_record *rec)
 	rec->normal = get_cylinder_normal(cy2, rec->p);
 	set_face_normal(ray, rec);
 	rec->albedo = cy->albedo;
+	rec->p = vplus(rec->p, vmult(rec->normal, EPSILON));
 	return (TRUE);
 }

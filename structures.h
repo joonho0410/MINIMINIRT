@@ -26,6 +26,8 @@ typedef struct	s_hit_record t_hit_record;
 typedef struct	s_object	t_object;
 typedef struct	s_light	t_light;
 typedef struct	s_scene t_scene;
+typedef struct	s_rotate t_rotate;
+typedef struct	s_rotate_seta t_rotate_seta;
 typedef int	t_bool;
 
 # define FALSE 0
@@ -129,4 +131,21 @@ struct	s_scene
 	t_ray			ray;
 	t_hit_record	rec;
 };
+
+struct	s_rotate
+{
+	t_vec3	x;
+	t_vec3	y;
+	t_vec3	z;
+};
+
+struct	s_rotate_seta
+{
+	double	sinp;
+	double	cosp;
+	double	sint;
+	double	cost;
+};
+
+
 #endif

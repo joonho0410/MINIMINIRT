@@ -19,7 +19,8 @@ SRCS = ./test.c ./print.c ./utils.c ./canvas.c ./scene.c ./ray.c ./object_create
 	   ./normal.c\
 	   ./object_utils.c\
 	   ./hit.c\
-	   ./phong_lighting.c
+	   ./phong_lighting.c\
+	   ./rotate.c
 OBJS = $(SRCS:.c=.o)
 INCLUDE = ./mlx
 

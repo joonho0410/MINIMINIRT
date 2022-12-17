@@ -19,11 +19,24 @@ t_camera    camera(t_canvas *canvas, t_point3 orig)
     double      viewport_height;
     double      h;
 
-    double  seta = 160;
-    h = tan(3.1415926 * seta / 180.0);
+    //fov
+    double  seta = 60; // 0 < seta < 180;
+    h = tan(M_PI * (seta / 2) / 180.0);
 
+    /*
+    //카메라 회전
+    t_vec3      nv = vec3(0, 0.1 , -1); // 카메라의 기본 벡터방향
+    t_vec3      rdup = vec3(0, 1 ,0);
+    if (nv.y != 0.0 && (nv.x == 0.0 && nv.z == 0.0))
+        rdup = vec3(0, 0, 1);
+    rdup = vunit(rdup);
+    t_vec3      horiz = vunit(vcross(rdup, nv));
+    t_vec3      vup = vunit(vcross(nv, horiz));
+    */
+    //카메라 뷰포트 그리기
     viewport_height = 2.0 * h;
     focal_len = 1;
+
     cam.orig = orig;
     cam.viewport_h = viewport_height;  
     cam.viewport_w = viewport_height * canvas->aspect_ratio;
@@ -33,5 +46,9 @@ t_camera    camera(t_canvas *canvas, t_point3 orig)
     // 왼쪽 아래 코너점 좌표, origin - horizontal / 2 - vertical / 2 - vec3(0,0,focal_length)
     cam.left_bottom = vminus(vminus(vminus(cam.orig, vdivide(cam.horizontal, 2)),
                                 vdivide(cam.vertical, 2)), vec3(0, 0, focal_len));
+    /*t_point3    view_center = vplus(orig, vunit(nv));
+    cam.left_bottom = vplus(view_center, vmult(horiz, cam.viewport_w / 2));
+    cam.left_bottom = vminus(cam.left_bottom, vmult(vup, cam.viewport_h / 2));
+    */ 
     return (cam);
 }
