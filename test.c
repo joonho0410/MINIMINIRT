@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junhjeon <junhjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 18:20:26 by junhjeon          #+#    #+#             */
-/*   Updated: 2022/12/07 20:52:23 by junhjeon         ###   ########.fr       */
+/*   Updated: 2022/12/18 15:32:57 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "utils.h"
 #include "print.h"
 #include "rotate.h"
+#include "parsing.h"
 
 t_scene *scene_init(void)
 {
@@ -43,7 +44,7 @@ t_scene *scene_init(void)
 	return (scene);
 }
 
-int main(void)
+int main(int argc, char **argv)
 {
     int         i;
     int         j;
@@ -52,6 +53,7 @@ int main(void)
 
     t_color3    pixel_color;
 	t_scene		*scene;
+    parsing(argc, argv);
     scene = scene_init();
 
     // 랜더링
