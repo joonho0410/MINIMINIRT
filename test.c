@@ -6,7 +6,7 @@
 /*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 18:20:26 by junhjeon          #+#    #+#             */
-/*   Updated: 2022/12/18 19:54:15 by seungsle         ###   ########.fr       */
+/*   Updated: 2022/12/18 22:04:04 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ int main(int argc, char **argv)
     t_color3    pixel_color;
 	t_scene		*scene;
     t_parse parse;
-    parsing(argc, argv, &parse);
+    t_object_p ob_p;
+    parsing(argc, argv, &parse, &ob_p);
     scene = scene_init();
 
     // 랜더링

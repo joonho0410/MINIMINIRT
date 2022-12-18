@@ -6,12 +6,13 @@
 /*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 15:33:15 by seungsle          #+#    #+#             */
-/*   Updated: 2022/12/18 21:55:33 by seungsle         ###   ########.fr       */
+/*   Updated: 2022/12/18 22:35:29 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "parsing_utils.h"
+#include "utils.h"
 #include <stdio.h>
 #include <fcntl.h>
 
@@ -265,6 +266,15 @@ double get_FOV(char *src)
 	return (ret);
 }
 
+double get_double(char *src)
+{
+	double	ret;
+
+	valid_decimal(src);
+	ret = ft_atod(src);
+	return (ret);
+}
+
 void parse_ambient(char *src, t_parse *parse)
 {
 	parse->A.rate = get_rate(src);
@@ -282,6 +292,21 @@ void parse_light(char *src, t_parse *parse)
 {
 	parse->L.light_point = get_point(src);
 	parse->L.bright_rate = get_rate(skip_whitespace(src));
+}
+
+void parse_sphere(char *src, t_parse *parse)
+{
+	oadd(&parse->ob_p, object(SP, sphere(get_point(src), get_double(skip_whitespace(src)) / 2), get_color(skip_whitespace(src))));
+}
+
+void parse_plane(char *src, t_parse *parse)
+{
+	oadd(&parse->ob_p, object(PL, plain(get_point(src), get_vector(skip_whitespace(src))), get_color(skip_whitespace(src))));
+}
+
+void parse_cylinder(char *src, t_parse *parse)
+{
+	oadd(&parse->ob_p, object(CY, cylinder(get_point(src), get_vector(skip_whitespace(src)), get_double(skip_whitespace(src)) / 2, get_double(skip_whitespace(src))), get_color(skip_whitespace(src))));
 }
 
 void parse_line(char *src, t_parse *parse)
@@ -331,6 +356,10 @@ void valid_contents(char *file_content, t_parse *parse)
 
 void parsing(int argc, char **argv, t_parse *parse)
 {
+	t_object_p	*ob_p;
+
+	ob_p = ofirst();
+	parse->ob_p = ob_p;
 	valid_argument(argc);
 	valid_file(argv[1]);
 	valid_contents(open_and_read(argv[1]), parse);
