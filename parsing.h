@@ -6,7 +6,7 @@
 /*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 14:36:56 by seungsle          #+#    #+#             */
-/*   Updated: 2022/12/18 15:33:10 by seungsle         ###   ########.fr       */
+/*   Updated: 2022/12/18 19:01:00 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,10 @@ struct s_objects {
 
 struct s_parse {
 	t_ambient A;
-	
+	t_camera C;
+	t_light L;
 };
 
-void parsing(int argc, char **argv);
+void parsing(int argc, char **argv, t_parse *parse);
 
 #endif
