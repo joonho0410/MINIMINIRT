@@ -6,7 +6,7 @@
 /*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 14:36:56 by seungsle          #+#    #+#             */
-/*   Updated: 2022/12/18 19:01:00 by seungsle         ###   ########.fr       */
+/*   Updated: 2022/12/18 21:25:35 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,43 +16,44 @@
 #include "structures.h"
 
 typedef struct s_parse t_parse;
-typedef struct s_ambient t_ambient;
-typedef struct s_camera t_camera;
-typedef struct s_light t_light;
-typedef struct s_objects t_objects;
-typedef struct s_sphere t_sphere;
-typedef struct s_plain t_plain;
-typedef struct s_cylinder t_cylinder;
+typedef struct s_ambient_p t_ambient_p;
+typedef struct s_camera_p t_camera_p;
+typedef struct s_light_p t_light_p;
+typedef struct s_objects_p t_objects_p;
+typedef struct s_sphere_p t_sphere_p;
+typedef struct s_plain_p t_plain_p;
+typedef struct s_cylinder_p t_cylinder_p;
+typedef struct s_set3 t_set3;
 
-struct s_ambient {
+struct s_ambient_p {
 	double rate;
 	t_color3 color;
 };
 
-struct s_camera {
+struct s_camera_p {
 	t_point3 view_point;
 	t_vec3 normal;
 	double FOV;
 };
 
-struct s_light {
+struct s_light_p {
 	t_point3 light_point;
 	double bright_rate;
 };
 
-struct s_sphere {
+struct s_sphere_p {
 	t_point3 center;
 	double diameter;
 	t_color3 color;
 };
 
-struct s_plain {
+struct s_plain_p {
 	t_point3 coordinates;
 	t_vec3 normal;
 	t_color3 color;
 };
 
-struct s_cylinder {
+struct s_cylinder_p {
 	t_point3 coordinates;
 	t_vec3 noraml;
 	double diameter;
@@ -60,15 +61,21 @@ struct s_cylinder {
 	t_color3 color;
 };
 
-struct s_objects {
+struct s_objects_p {
 	int size;
 	void *object;
 };
 
 struct s_parse {
-	t_ambient A;
-	t_camera C;
-	t_light L;
+	t_ambient_p A;
+	t_camera_p C;
+	t_light_p L;
+};
+
+struct s_set3 {
+	char *src1;
+	char *src2;
+	char *src3;
 };
 
 void parsing(int argc, char **argv, t_parse *parse);
