@@ -6,12 +6,13 @@
 /*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 10:40:58 by seungsle          #+#    #+#             */
-/*   Updated: 2022/12/19 12:15:38 by seungsle         ###   ########.fr       */
+/*   Updated: 2022/12/19 18:38:05 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx_window.h"
 #include "trace.h"
+#include "print.h"
 
 #define WIN_WIDTH 400
 #define WIN_HEIGHT 300
@@ -53,9 +54,9 @@ void	put_color(t_mlx_data *data, t_img *img, int x, int y)
 	data->scene->ray = ray_primary(&data->scene->camera, u, v);
 	pixel_color = ray_color(data->scene);
 	offset = (x * (img->bpp / 8)) + (y * img->size_l);
-	img->data[offset] = (int)(255.999 * pixel_color.x);
+	img->data[offset] = (int)(255.999 * pixel_color.z);
 	img->data[offset + 1] = (int)(255.999 * pixel_color.y);
-	img->data[offset + 2] = (int)(255.999 * pixel_color.z);
+	img->data[offset + 2] = (int)(255.999 * pixel_color.x);
 	return ;
 }
 
@@ -75,6 +76,7 @@ void	pxl_to_img(t_scene *scene, t_mlx_data *data)
 			while (i < scene->canvas.width)
 			{
 				put_color(data, &(data->img), i, j);
+				// printf("%d %d\n", i, j);
 				++i;
 			}
 			--j;

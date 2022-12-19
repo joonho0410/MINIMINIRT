@@ -6,7 +6,7 @@
 /*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 15:33:15 by seungsle          #+#    #+#             */
-/*   Updated: 2022/12/19 12:11:56 by seungsle         ###   ########.fr       */
+/*   Updated: 2022/12/19 18:26:26 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -383,11 +383,18 @@ void valid_contents(char *file_content, t_parse *parse)
 	char *tmp;
 
 	tmp = read_line(file_content, parse);
-	while (tmp && !is_empty(tmp))
+	while (tmp && ft_strlen(tmp))
 	{
 		tmp = read_line(tmp, parse);
 	}
 	free(file_content);
+}
+
+void divide_3(t_ambient_p *a)
+{
+	a->color.x /= 255;
+	a->color.y /= 255;
+	a->color.z /= 255;
 }
 
 t_scene *scene_init(t_parse *parse)
@@ -400,8 +407,9 @@ t_scene *scene_init(t_parse *parse)
 	scene->canvas = canvas(400, 300);
 	scene->camera = camera(&scene->canvas, parse);
 	scene->world = parse->ob_p->next;
-	lights = object(LIGHT_POINT, light_point(parse->L.light_point, color3(1, 1, 1), parse->L.bright_rate), color3(0, 0, 0));
+	lights = object(LIGHT_POINT, light_point(point3(0, 20, 0), color3(1, 1, 1), 0.5), color3(0, 0, 0));
 	scene->light = lights;
+	divide_3(&parse->A);
 	scene->ambient = vmult(parse->A.color, parse->A.rate); // 이게 맞나...??
 	rotate_world(scene, parse->ob_p->next, parse);
 	return (scene);
