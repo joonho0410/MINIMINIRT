@@ -6,7 +6,7 @@
 /*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 15:33:15 by seungsle          #+#    #+#             */
-/*   Updated: 2022/12/19 18:26:26 by seungsle         ###   ########.fr       */
+/*   Updated: 2022/12/19 20:32:04 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -306,6 +306,15 @@ void parse_light(char *src, t_parse *parse)
 	parse->L.bright_rate = get_rate(skip_whitespace(src));
 }
 
+t_color3 zero_to_one(t_color3 color)
+{
+	color.x /= 255;
+	color.y /= 255;
+	color.z /= 255;
+
+	return (color);
+}
+
 void parse_sphere(char *src, t_parse *parse)
 {
 	char	*tmp1;
@@ -313,7 +322,7 @@ void parse_sphere(char *src, t_parse *parse)
 
 	tmp1 = skip_whitespace(src);
 	tmp2 = skip_whitespace(tmp1);
-	oadd(&parse->ob_p, object(SP, sphere(get_point(src), get_double(tmp1) / 2), get_color(tmp2)));
+	oadd(&parse->ob_p, object(SP, sphere(get_point(src), get_double(tmp1) / 2), zero_to_one(get_color(tmp2))));
 }
 
 void parse_plane(char *src, t_parse *parse)
@@ -323,7 +332,7 @@ void parse_plane(char *src, t_parse *parse)
 
 	tmp1 = skip_whitespace(src);
 	tmp2 = skip_whitespace(tmp1);
-	oadd(&parse->ob_p, object(PL, plain(get_point(src), get_vector(tmp1)), get_color(tmp2)));
+	oadd(&parse->ob_p, object(PL, plain(get_point(src), get_vector(tmp1)), zero_to_one(get_color(tmp2))));
 }
 
 void parse_cylinder(char *src, t_parse *parse)
@@ -337,7 +346,7 @@ void parse_cylinder(char *src, t_parse *parse)
 	tmp2 = skip_whitespace(tmp1);
 	tmp3 = skip_whitespace(tmp2);
 	tmp4 = skip_whitespace(tmp3);
-	oadd(&parse->ob_p, object(CY, cylinder(get_point(src), get_vector(tmp1), get_double(tmp2) / 2, get_double(tmp3)), get_color(tmp4)));
+	oadd(&parse->ob_p, object(CY, cylinder(get_point(src), get_vector(tmp1), get_double(tmp2) / 2, get_double(tmp3)), zero_to_one(get_color(tmp4))));
 }
 
 void parse_line(char *src, t_parse *parse)
@@ -407,10 +416,10 @@ t_scene *scene_init(t_parse *parse)
 	scene->canvas = canvas(400, 300);
 	scene->camera = camera(&scene->canvas, parse);
 	scene->world = parse->ob_p->next;
-	lights = object(LIGHT_POINT, light_point(point3(0, 20, 0), color3(1, 1, 1), 0.5), color3(0, 0, 0));
+	lights = object(LIGHT_POINT, light_point(parse->L.light_point, color3(1, 1, 1), parse->L.bright_rate), zero_to_one(color3(0, 0, 0)));
 	scene->light = lights;
 	divide_3(&parse->A);
-	scene->ambient = vmult(parse->A.color, parse->A.rate); // 이게 맞나...??
+	scene->ambient = vmult(color3(1, 1, 1), 0.5); // 이게 맞나...??
 	rotate_world(scene, parse->ob_p->next, parse);
 	return (scene);
 }
