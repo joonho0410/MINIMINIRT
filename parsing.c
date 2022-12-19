@@ -6,7 +6,7 @@
 /*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 15:33:15 by seungsle          #+#    #+#             */
-/*   Updated: 2022/12/19 10:29:24 by seungsle         ###   ########.fr       */
+/*   Updated: 2022/12/19 12:11:56 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -410,7 +410,6 @@ t_scene *scene_init(t_parse *parse)
 t_scene *parsing(int argc, char **argv, t_parse *parse)
 {
 	t_object	*ob_p;
-	t_scene		*scene;
 
 	ob_p = ofirst();
 	parse->ob_p = ob_p;
