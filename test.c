@@ -6,7 +6,7 @@
 /*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 18:20:26 by junhjeon          #+#    #+#             */
-/*   Updated: 2022/12/19 09:13:29 by seungsle         ###   ########.fr       */
+/*   Updated: 2022/12/19 18:27:37 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "print.h"
 #include "rotate.h"
 #include "parsing.h"
+#include "mlx_window.h"
 
 // t_scene *scene_init(t_parse *parse)
 // {
@@ -43,15 +44,28 @@
 // 	return (scene);
 // }
 
+void mlx_window_init(t_scene *scene, t_mlx_data *mlx_data)
+{
+    mlx_data->mlx.mlx_ptr = NULL;
+    mlx_data->mlx.win = NULL;
+   	mlx_data->img.img_ptr = NULL;
+    mlx_data->img.data = NULL;
+    mlx_data->rgb.r = 0;
+    mlx_data->rgb.g = 0;
+    mlx_data->rgb.b = 0;
+    mlx_data->scene = scene;
+}
+
 int main(int argc, char **argv)
 {
-    int         i;
-    int         j;
-    double      u;
-    double      v;
+    // int         i;
+    // int         j;
+    // double      u;
+    // double      v;
 
-    t_color3    pixel_color;
+    // t_color3    pixel_color;
 	t_scene		*scene;
+    t_mlx_data  mlx_data;
     t_parse parse;
     // t_object ob_p;
     scene = parsing(argc, argv, &parse);
@@ -61,19 +75,21 @@ int main(int argc, char **argv)
     // P3 는 색상값이 아스키코드라는 뜻, 그리고 다음 줄은 캔버스의 가로, 세로 픽셀 수, 마지막은 사용할 색상값
     /* * * * 수정 * * * */
     printf("P3\n%d %d\n255\n", scene->canvas.width, scene->canvas.height);
-    j = scene->canvas.height - 1;
-    while (j >= 0)
-    {
-        i = 0;
-        while (i < scene->canvas.width)
-        {
-            u = (double)i / (scene->canvas.width - 1);
-            v = (double)j / (scene->canvas.height - 1);
-            scene->ray = ray_primary(&scene->camera, u, v);
-            pixel_color = ray_color(scene);
-            write_color(pixel_color);
-            ++i;
-        }
-        --j;
-    }
+    mlx_window_init(scene, &mlx_data);
+    execute(scene, &mlx_data);
+    // j = scene->canvas.height - 1;
+    // while (j >= 0)
+    // {
+    //     i = 0;
+    //     while (i < scene->canvas.width)
+    //     {
+    //         u = (double)i / (scene->canvas.width - 1);
+    //         v = (double)j / (scene->canvas.height - 1);
+    //         scene->ray = ray_primary(&scene->camera, u, v);
+    //         pixel_color = ray_color(scene);
+    //         write_color(pixel_color);
+    //         ++i;
+    //     }
+    //     --j;
+    // }
 }
