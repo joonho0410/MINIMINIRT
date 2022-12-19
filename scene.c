@@ -3,24 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junhjeon <junhjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 20:18:10 by junhjeon          #+#    #+#             */
-/*   Updated: 2022/12/02 20:18:12 by junhjeon         ###   ########.fr       */
+/*   Updated: 2022/12/19 09:11:02 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scene.h"
+#include "parsing.h"
 
-t_camera    camera(t_canvas *canvas, t_point3 orig)
+t_camera    camera(t_canvas *canvas, t_parse *parse)
 {
+    // camera FOV, view point 설정
     t_camera    cam;
     double      focal_len;
     double      viewport_height;
     double      h;
 
     //fov
-    double  seta = 60; // 0 < seta < 180;
+    double  seta = parse->C.FOV; // 0 < seta < 180;
     h = tan(M_PI * (seta / 2) / 180.0);
 
     /*
@@ -37,7 +39,7 @@ t_camera    camera(t_canvas *canvas, t_point3 orig)
     viewport_height = 2.0 * h;
     focal_len = 1;
 
-    cam.orig = orig;
+    cam.orig = parse->C.view_point;
     cam.viewport_h = viewport_height;  
     cam.viewport_w = viewport_height * canvas->aspect_ratio;
     cam.focal_len = focal_len;

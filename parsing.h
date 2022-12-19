@@ -6,7 +6,7 @@
 /*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 14:36:56 by seungsle          #+#    #+#             */
-/*   Updated: 2022/12/18 22:31:31 by seungsle         ###   ########.fr       */
+/*   Updated: 2022/12/19 08:52:37 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,6 @@ struct s_set3 {
 	char *src3;
 };
 
-void parsing(int argc, char **argv, t_parse *parse);
+t_scene *parsing(int argc, char **argv, t_parse *parse);
 
 #endif

@@ -6,13 +6,14 @@
 /*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 15:33:15 by seungsle          #+#    #+#             */
-/*   Updated: 2022/12/18 22:35:29 by seungsle         ###   ########.fr       */
+/*   Updated: 2022/12/19 09:16:28 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "parsing_utils.h"
 #include "utils.h"
+#include "rotate.h"
 #include <stdio.h>
 #include <fcntl.h>
 
@@ -354,13 +355,31 @@ void valid_contents(char *file_content, t_parse *parse)
 	free(file_content);
 }
 
-void parsing(int argc, char **argv, t_parse *parse)
+t_scene *scene_init(t_parse *parse)
 {
-	t_object_p	*ob_p;
+	t_object	*lights;
+
+	if (!(scene = (t_scene *)malloc(sizeof(t_scene))))
+		return (0);
+	scene->canvas = canvas(400, 300);
+	scene->camera = camera(&scene->canvas, parse);
+	scene->world = parse->ob_p->next;
+	lights = object(LIGHT_POINT, light_point(parse->L.light_point, color3(1, 1, 1), 0.5), parse->L.bright_rate);
+	scene->light = lights;
+	scene->ambient = vmult(parse->A.color, parse->A.rate); // 이게 맞나...??
+	rotate_world(scene, parse->ob_p->next, parse);
+	return (scene);
+}
+
+t_scene *parsing(int argc, char **argv, t_parse *parse)
+{
+	t_object	*ob_p;
+	t_scene		*scene;
 
 	ob_p = ofirst();
 	parse->ob_p = ob_p;
 	valid_argument(argc);
 	valid_file(argv[1]);
 	valid_contents(open_and_read(argv[1]), parse);
+	return (scene_init(parse));
 }
