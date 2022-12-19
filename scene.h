@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junhjeon <junhjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 20:17:21 by junhjeon          #+#    #+#             */
-/*   Updated: 2022/12/07 16:58:33 by junhjeon         ###   ########.fr       */
+/*   Updated: 2022/12/19 09:07:39 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 
 # include "structures.h"
 # include "utils.h"
+# include "parsing.h"
 
 t_canvas    canvas(int  width, int height);
-t_camera    camera(t_canvas *canvas, t_point3 origin);
+t_camera    camera(t_canvas *canvas, t_parse *parse);
 t_sphere	*sphere(t_point3 center, double radius);
 t_plain		*plain(t_point3 center, t_vec3 normal);
 t_cylinder	*cylinder(t_point3 center, t_vec3 normal, double radius, double height);
