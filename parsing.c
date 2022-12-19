@@ -6,16 +6,16 @@
 /*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 15:33:15 by seungsle          #+#    #+#             */
-/*   Updated: 2022/12/19 09:16:28 by seungsle         ###   ########.fr       */
+/*   Updated: 2022/12/19 10:29:24 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
 #include "parsing_utils.h"
 #include "utils.h"
 #include "rotate.h"
 #include <stdio.h>
 #include <fcntl.h>
+#include <unistd.h>
 
 void exit_print(void)
 {
@@ -56,7 +56,7 @@ void valid_file(char *str)
 	temp = find_char(str, '.');
 	if (temp == NULL)
 		exit_print();
-	temp = find_char(temp, '.');
+	temp = find_char(temp + 1, '.');
 	if (temp != NULL)
 		exit_print();
 }
@@ -73,7 +73,7 @@ char *open_and_read(char *file_name)
 		perror_exit("Error: opening file");
 	file_size = lseek(fd, 0, SEEK_END);
 	lseek(fd, 0, SEEK_SET);
-	file_contents = malloc(file_size * sizeof(char));
+	file_contents = malloc((file_size + 1) * sizeof(char));
 	if (file_contents == NULL)
 		perror_exit("Error: malloc failed");
 	bytes_read = read(fd, file_contents, file_size);
@@ -118,6 +118,13 @@ int is_dot(char c)
 	return (FALSE);	
 }
 
+int is_empty(char *str)
+{
+	if (str && ft_strncmp(str, "", -1))
+		return (TRUE);
+	return (FALSE);
+}
+
 void valid_decimal(char *src)
 {
 	int	i;
@@ -127,15 +134,15 @@ void valid_decimal(char *src)
 		i++;
 	if (is_whitespace(src[i]))
 		exit_print();
-	while (!is_whitespace(src[i]) && !is_dot(src[i]))
+	while (src[i] && !is_whitespace(src[i]) && !is_dot(src[i]))
 	{
 		if (!is_digit(src[i]) && !is_dot(src[i]))
 			exit_print();
 		i++;
 	}
-	if (is_dot(src[i++]))
+	if (src[i] && is_dot(src[i++]))
 	{
-		while (!is_whitespace(src[i]))
+		while (src[i] && !is_whitespace(src[i]))
 		{
 			if (!is_digit(src[i]))
 				exit_print();
@@ -153,7 +160,7 @@ void valid_digit(char *src)
 		i++;
 	if (is_whitespace(src[i]))
 		exit_print();
-	while (!is_whitespace(src[i]))
+	while (src[i] && !is_whitespace(src[i]))
 	{
 		if (!is_digit(src[i]))
 			exit_print();
@@ -194,10 +201,10 @@ void slice_set(char *src, t_set3 *set3)
 		}
 		i++;
 	}
-	set3->src1 = (char *)malloc(sizeof(char) * (tmp1 - src + 1));
+	set3->src1 = (char *)malloc(sizeof(char) * ((tmp1 + 1) - src + 1));
 	set3->src2 = (char *)malloc(sizeof(char) * (tmp2 - tmp1 + 1));
 	set3->src3 = (char *)malloc(sizeof(char) * (tmp3 - tmp2 + 1));
-	ft_strlcpy(set3->src1, src, tmp1 - src);
+	ft_strlcpy(set3->src1, src, (tmp1 + 1) - src);
 	ft_strlcpy(set3->src2, tmp1 + 1, tmp2 - tmp1);
 	ft_strlcpy(set3->src3, tmp2 + 1, tmp3 - tmp2);
 }
@@ -284,9 +291,13 @@ void parse_ambient(char *src, t_parse *parse)
 
 void parse_camera(char *src, t_parse *parse)
 {
+	char	*tmp;
+
 	parse->C.view_point = get_point(src);
-	parse->C.normal = get_vector(skip_whitespace(src));
-	parse->C.FOV = get_FOV(skip_whitespace(src));
+	tmp = skip_whitespace(src);
+	parse->C.normal = get_vector(tmp);
+	tmp = skip_whitespace(tmp);
+	parse->C.FOV = get_FOV(tmp);
 }
 
 void parse_light(char *src, t_parse *parse)
@@ -297,17 +308,36 @@ void parse_light(char *src, t_parse *parse)
 
 void parse_sphere(char *src, t_parse *parse)
 {
-	oadd(&parse->ob_p, object(SP, sphere(get_point(src), get_double(skip_whitespace(src)) / 2), get_color(skip_whitespace(src))));
+	char	*tmp1;
+	char	*tmp2;
+
+	tmp1 = skip_whitespace(src);
+	tmp2 = skip_whitespace(tmp1);
+	oadd(&parse->ob_p, object(SP, sphere(get_point(src), get_double(tmp1) / 2), get_color(tmp2)));
 }
 
 void parse_plane(char *src, t_parse *parse)
 {
-	oadd(&parse->ob_p, object(PL, plain(get_point(src), get_vector(skip_whitespace(src))), get_color(skip_whitespace(src))));
+	char	*tmp1;
+	char	*tmp2;
+
+	tmp1 = skip_whitespace(src);
+	tmp2 = skip_whitespace(tmp1);
+	oadd(&parse->ob_p, object(PL, plain(get_point(src), get_vector(tmp1)), get_color(tmp2)));
 }
 
 void parse_cylinder(char *src, t_parse *parse)
 {
-	oadd(&parse->ob_p, object(CY, cylinder(get_point(src), get_vector(skip_whitespace(src)), get_double(skip_whitespace(src)) / 2, get_double(skip_whitespace(src))), get_color(skip_whitespace(src))));
+	char	*tmp1;
+	char	*tmp2;
+	char	*tmp3;
+	char	*tmp4;
+
+	tmp1 = skip_whitespace(src);
+	tmp2 = skip_whitespace(tmp1);
+	tmp3 = skip_whitespace(tmp2);
+	tmp4 = skip_whitespace(tmp3);
+	oadd(&parse->ob_p, object(CY, cylinder(get_point(src), get_vector(tmp1), get_double(tmp2) / 2, get_double(tmp3)), get_color(tmp4)));
 }
 
 void parse_line(char *src, t_parse *parse)
@@ -332,12 +362,17 @@ char *read_line(char *line, t_parse *parse)
 {
 	char *ret;
 	char *tmp;
+	int	size;
 
 	ret = find_char(line, '\n');
 	if (ret == line)
 		return (ret + 1);
-	tmp = (char *)malloc(sizeof(char) * (ret - line + 1));
-	ft_strlcpy(tmp, line, tmp - line);
+	if (ret != NULL)
+		size = ret - line + 1;
+	else
+		size = ft_strlen(line) + 1;
+	tmp = (char *)malloc(sizeof(char) * (size));
+	ft_strlcpy(tmp, line, size);
 	parse_line(tmp, parse);
 	free(tmp);
 	return (ret + 1);
@@ -348,7 +383,7 @@ void valid_contents(char *file_content, t_parse *parse)
 	char *tmp;
 
 	tmp = read_line(file_content, parse);
-	while (tmp)
+	while (tmp && !is_empty(tmp))
 	{
 		tmp = read_line(tmp, parse);
 	}
@@ -358,13 +393,14 @@ void valid_contents(char *file_content, t_parse *parse)
 t_scene *scene_init(t_parse *parse)
 {
 	t_object	*lights;
+	t_scene		*scene;
 
 	if (!(scene = (t_scene *)malloc(sizeof(t_scene))))
 		return (0);
 	scene->canvas = canvas(400, 300);
 	scene->camera = camera(&scene->canvas, parse);
 	scene->world = parse->ob_p->next;
-	lights = object(LIGHT_POINT, light_point(parse->L.light_point, color3(1, 1, 1), 0.5), parse->L.bright_rate);
+	lights = object(LIGHT_POINT, light_point(parse->L.light_point, color3(1, 1, 1), parse->L.bright_rate), color3(0, 0, 0));
 	scene->light = lights;
 	scene->ambient = vmult(parse->A.color, parse->A.rate); // 이게 맞나...??
 	rotate_world(scene, parse->ob_p->next, parse);

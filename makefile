@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: junhjeon <junhjeon@student.42seoul.kr>     +#+  +:+       +#+         #
+#    By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/09 10:49:53 by junhjeon          #+#    #+#              #
-#    Updated: 2022/12/07 20:35:59 by junhjeon         ###   ########.fr        #
+#    Updated: 2022/12/19 09:27:54 by seungsle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = cc
+CC = cc -g
 CFLAGS = 
 #-Wall -Wextra -Werror
 SRC_DIR = .
@@ -20,7 +20,9 @@ SRCS = ./test.c ./print.c ./utils.c ./canvas.c ./scene.c ./ray.c ./object_create
 	   ./object_utils.c\
 	   ./hit.c\
 	   ./phong_lighting.c\
-	   ./rotate.c
+	   ./rotate.c\
+	   ./parsing.c\
+	   ./parsing_utils.c
 OBJS = $(SRCS:.c=.o)
 INCLUDE = ./mlx
 

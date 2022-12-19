@@ -6,7 +6,7 @@
 /*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 17:20:15 by seungsle          #+#    #+#             */
-/*   Updated: 2022/12/18 21:25:31 by seungsle         ###   ########.fr       */
+/*   Updated: 2022/12/19 09:26:34 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define PARSING_UTILS_H_
 
 #include <stdlib.h>
+#include <math.h>
 
 typedef struct s_atod t_atod;
 

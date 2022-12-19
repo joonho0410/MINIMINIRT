@@ -6,12 +6,11 @@
 /*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 20:18:10 by junhjeon          #+#    #+#             */
-/*   Updated: 2022/12/19 09:11:02 by seungsle         ###   ########.fr       */
+/*   Updated: 2022/12/19 09:19:56 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scene.h"
-#include "parsing.h"
 
 t_camera    camera(t_canvas *canvas, t_parse *parse)
 {
