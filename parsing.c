@@ -6,7 +6,7 @@
 /*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 15:33:15 by seungsle          #+#    #+#             */
-/*   Updated: 2022/12/20 20:33:11 by seungsle         ###   ########.fr       */
+/*   Updated: 2022/12/21 07:38:28 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -285,25 +285,44 @@ double get_double(char *src)
 
 void parse_ambient(char *src, t_parse *parse)
 {
-	parse->A.rate = get_rate(src);
-	parse->A.color = get_color(skip_whitespace(src));
+	if (parse->A.updated == FALSE)
+	{
+		parse->A.rate = get_rate(src);
+		parse->A.color = get_color(skip_whitespace(src));
+		parse->A.updated = TRUE;
+	}
+	else
+		exit_print();
 }
 
 void parse_camera(char *src, t_parse *parse)
 {
 	char	*tmp;
 
-	parse->C.view_point = get_point(src);
-	tmp = skip_whitespace(src);
-	parse->C.normal = get_vector(tmp);
-	tmp = skip_whitespace(tmp);
-	parse->C.FOV = get_FOV(tmp);
+	if (parse->C.updated == FALSE)
+	{
+		parse->C.view_point = get_point(src);
+		tmp = skip_whitespace(src);
+		parse->C.normal = get_vector(tmp);
+		tmp = skip_whitespace(tmp);
+		parse->C.FOV = get_FOV(tmp);
+		parse->C.updated = TRUE;
+	}
+	else
+		exit_print();
+	
 }
 
 void parse_light(char *src, t_parse *parse)
 {
-	parse->L.light_point = get_point(src);
-	parse->L.bright_rate = get_rate(skip_whitespace(src));
+	if (parse->L.updated == FALSE)
+	{
+		parse->L.light_point = get_point(src);
+		parse->L.bright_rate = get_rate(skip_whitespace(src));
+		parse->L.updated = TRUE;
+	}
+	else
+		exit_print();
 }
 
 t_color3 zero_to_one(t_color3 color)
@@ -431,6 +450,9 @@ t_scene *parsing(int argc, char **argv, t_parse *parse)
 
 	ob_p = ofirst();
 	parse->ob_p = ob_p;
+	parse->A.updated = FALSE;
+	parse->C.updated = FALSE;
+	parse->L.updated = FALSE;
 	valid_argument(argc);
 	valid_file(argv[1]);
 	valid_contents(open_and_read(argv[1]), parse);

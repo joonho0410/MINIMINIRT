@@ -6,7 +6,7 @@
 /*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 14:36:56 by seungsle          #+#    #+#             */
-/*   Updated: 2022/12/19 09:20:17 by seungsle         ###   ########.fr       */
+/*   Updated: 2022/12/21 07:34:37 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,20 @@ typedef struct s_cylinder_p t_cylinder_p;
 typedef struct s_set3 t_set3;
 
 struct s_ambient_p {
+	int updated;
 	double rate;
 	t_color3 color;
 };
 
 struct s_camera_p {
+	int updated;
 	t_point3 view_point;
 	t_vec3 normal;
 	double FOV;
 };
 
 struct s_light_p {
+	int updated;
 	t_point3 light_point;
 	double bright_rate;
 };

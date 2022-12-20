@@ -6,7 +6,7 @@
 /*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 18:20:26 by junhjeon          #+#    #+#             */
-/*   Updated: 2022/12/20 20:16:27 by seungsle         ###   ########.fr       */
+/*   Updated: 2022/12/21 07:29:25 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,26 @@ void mlx_window_init(t_scene *scene, t_mlx_data *mlx_data)
 	// return (scene);
 }
 
+void print_color(t_vec3 *vec)
+{
+    printf("(%f, %f, %f)\n", vec->x, vec->y, vec->z);
+}
+
+void print_parsing(t_parse *parse)
+{
+    printf("A : color > ");
+    print_color(&parse->A.color);
+    printf("A : rate > %f\n", parse->A.rate);
+    printf("C : FOV > %f\n", parse->C.FOV);
+    printf("C : normal > ");
+    print_color(&parse->C.normal);
+    printf("C : view point > ");
+    print_color(&parse->C.view_point);
+    printf("L : rate > %f\n", parse->L.bright_rate);
+    printf("L : light point > ");
+    print_color(&parse->L.light_point);
+}
+
 int main(int argc, char **argv)
 {
     // int         i;
@@ -90,6 +110,7 @@ int main(int argc, char **argv)
     t_parse parse;
     // t_object ob_p;
     scene = parsing(argc, argv, &parse);
+    print_parsing(&parse);
     // scene = scene_init(&parse);
 
     // 랜더링
