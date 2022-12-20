@@ -25,17 +25,18 @@ void	key_1(int keycode)
 void	key_2(int keycode, t_mlx_data *data)
 {
 	if (keycode == KEY_UP)
-		data->scene->camera.orig.y += 0.1;
+		data->scene->camera.real_orig.y += 0.1;
 	else if (keycode == KEY_DOWN)
-		data->scene->camera.orig.y -= 0.1;
+		data->scene->camera.real_orig.y -= 0.1;
 	else if (keycode == KEY_LEFT)
-		data->scene->camera.orig.x += 0.1;
+		data->scene->camera.real_orig.x += 0.1;
 	else if (keycode == KEY_RIGHT)
-		data->scene->camera.orig.x -= 0.1;
+		data->scene->camera.real_orig.x -= 0.1;
 	else if (keycode == KEY_P)
-		data->scene->camera.orig.z += 0.1;
+		data->scene->camera.real_orig.z += 0.1;
 	else if (keycode == KEY_M)
-		data->scene->camera.orig.z -= 0.1;
+		data->scene->camera.real_orig.z -= 0.1;
+	rotate_world(data->scene, data->scene->world->next);
 	return ;
 }
 
@@ -57,11 +58,20 @@ void	key_3(int keycode, t_mlx_data *data)
 		rotate_world(data->scene, data->scene->world->next);
 	}
 	else if (keycode == KEY_S)
+	{
 		data->scene->c_normal.y -= 0.1;
+		rotate_world(data->scene, data->scene->world->next);
+	}
 	else if (keycode == KEY_A)
+	{
 		data->scene->c_normal.x += 0.1;
+		rotate_world(data->scene, data->scene->world->next);
+	}
 	else if (keycode == KEY_D)
+	{
 		data->scene->c_normal.x -= 0.1;
+		rotate_world(data->scene, data->scene->world->next);
+	}
 	return ;
 }
 

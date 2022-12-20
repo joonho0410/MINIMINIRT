@@ -58,6 +58,7 @@ struct s_ray
 
 struct  s_camera
 {
+	t_point3	real_orig;
     t_point3    orig;  // 카메라 원점(위치)
     double      viewport_h; // 뷰포트 세로길이
     double      viewport_w; // 뷰포트 가로길이
@@ -76,6 +77,7 @@ struct  s_canvas
 
 struct s_sphere
 {
+	t_point3	real_center;
 	t_point3	center;
 	double		radius;
 	double		radius2;
@@ -83,13 +85,17 @@ struct s_sphere
 
 struct	s_plain
 {
+	t_point3	real_center;
 	t_point3	center;
+	t_vec3		real_normal;
 	t_vec3		normal;
 };
 
 struct	s_cylinder
 {
+	t_point3	real_center;
 	t_point3	center;
+	t_vec3		real_normal;
 	t_vec3		normal;
 	double		radius;
 	double		height;
@@ -116,6 +122,7 @@ struct	s_object
 
 struct	s_light
 {
+	t_point3	real_origin;
 	t_point3	origin;
 	t_color3	light_color;
 	double		bright_ratio;

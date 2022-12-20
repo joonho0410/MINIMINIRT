@@ -28,7 +28,7 @@ void debugPrintVec3(t_vec3 *new_point, char *str) {
 void    rotate_world(t_scene *scene, t_object *world)
 {
     // debugPrintVec3(&scene->camera.orig, "camera orig"); 
-    t_vec3  move_p = vec3(-(scene->camera.orig.x), -(scene->camera.orig.y), -(scene->camera.orig.z));
+    t_vec3  move_p = vec3(-(scene->camera.real_orig.x), -(scene->camera.real_orig.y), -(scene->camera.real_orig.z));
     // debugPrintVec3(&move_p, "move_p");
     t_vec3  camera_normal = vunit(scene->c_normal); // 카메라좌표계의 z축. -> (0, 0, -1); camera->normal (1, 1, 0 ) -> (0, 0, 1);
     // debugPrintVec3(&camera_normal, "camera normal");
@@ -70,7 +70,7 @@ void    rotate_world(t_scene *scene, t_object *world)
     t_light    *lights = scene->light->element;
     t_point3    newlights;
     // debugPrintVec3(lights, "lights before");
-    lights->origin = vplus(lights->origin, move_p);
+    lights->origin = vplus(lights->real_origin, move_p);
     newlights.x = vdot(r.x, lights->origin);
     newlights.y = vdot(r.y, lights->origin);
     newlights.z = vdot(r.z, lights->origin);
@@ -95,9 +95,8 @@ void    rotate_sp(t_object *obj, t_vec3 move_p, t_rotate axis, t_rotate r)
     t_vec3      new_point;
 
     (void)r;
-    (void)axis;
     sp = obj->element;
-    sp->center = vplus(sp->center, move_p);
+    sp->center = vplus(sp->real_center, move_p);
     new_point.x = vdot(axis.x, sp->center);
     new_point.y = vdot(axis.y, sp->center);
     new_point.z = vdot(axis.z, sp->center);
@@ -112,21 +111,12 @@ void    rotate_cy(t_object *obj, t_vec3 move_p, t_rotate axis, t_rotate r)
 
     (void)r;
     cy = obj->element;
-    // debugPrintVec3(&cy->center);
-    // new_normal = vmult(axis.x, vunit(cy->normal).x);
-    // new_normal = vplus(new_normal, vmult(axis.y, vunit(cy->normal).y));
-    // new_normal = vplus(new_normal, vmult(axis.z, vunit(cy->normal).z));
-    new_normal.x = vdot(axis.x, cy->normal);
-    new_normal.y = vdot(axis.y, cy->normal);
-    new_normal.z = vdot(axis.z, cy->normal);
+    new_normal.x = vdot(axis.x, cy->real_normal);
+    new_normal.y = vdot(axis.y, cy->real_normal);
+    new_normal.z = vdot(axis.z, cy->real_normal);
     cy->normal = vunit(new_normal);
 
-    cy->center = vplus(cy->center, move_p);
-    // debugPrintVec3(&cy->center, "center");
-    // debugPrintVec3(&new_normal, "normal");
-    // new_point.x = (cy->center.x * r.x.x) + (cy->center.y * r.x.y) + (cy->center.z * r.x.z); // x 좌표값
-    // new_point.y = (cy->center.x * r.y.x) + (cy->center.y * r.y.y) + (cy->center.z * r.y.z);
-    // new_point.z = (cy->center.x * r.z.x) + (cy->center.z * r.z.y) + (cy->center.z * r.z.z);
+    cy->center = vplus(cy->real_center, move_p);
     new_point.x = vdot(axis.x, cy->center);
     new_point.y = vdot(axis.y, cy->center);
     new_point.z = vdot(axis.z, cy->center);
@@ -143,20 +133,16 @@ void    rotate_pl(t_object *obj, t_vec3 move_p, t_rotate axis, t_rotate r)
 
     (void)r;
     pl = obj->element;
-    pl->center = vplus(pl->center, move_p);
-    //printf("normal : %f , %f , %f\n", pl->normal.x, pl->normal.y, pl->normal.z);
-    // new_normal = vmult(axis.x, vunit(pl->normal).x);
-    // new_normal = vplus(new_normal, vmult(axis.y, vunit(pl->normal).y));
-    // new_normal = vplus(new_normal, vmult(axis.z, vunit(pl->normal).z));
     new_normal.x = vdot(axis.x, pl->normal);
     new_normal.y = vdot(axis.y, pl->normal);
     new_normal.z = vdot(axis.z, pl->normal);
     pl->normal = vunit(new_normal);
 
+    pl->center = vplus(pl->real_center, move_p);
     new_point.x = vdot(axis.x, pl->center);
     new_point.y = vdot(axis.y, pl->center);
     new_point.z = vdot(axis.z, pl->center);
     pl->center = new_point;
-// debugPrintVec3(&pl->center, "pl->center");
-// debugPrintVec3(&pl->normal, "pl->normal");
+ debugPrintVec3(&pl->center, "pl->center");
+ debugPrintVec3(&pl->normal, "pl->normal");
 }

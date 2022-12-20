@@ -32,6 +32,7 @@ t_sphere	*sphere(t_point3 center, double radius)
 
 	if (!(sp = (t_sphere *)malloc(sizeof(t_sphere))))
 		return (0);
+	sp->real_center = center;
 	sp->center = center;
 	sp->radius = radius;
 	sp->radius2 = radius * radius;
@@ -44,7 +45,9 @@ t_plain	*plain(t_point3 center, t_vec3 normal)
 
 	if (!(pl = (t_plain *)malloc(sizeof(t_plain))))
 		return (0);
+	pl->real_center = center;
 	pl->center = center;
+	pl->real_normal = normal;
 	pl->normal = normal;
 	return (pl);
 }
@@ -55,7 +58,9 @@ t_cylinder	*cylinder(t_point3 center, t_vec3 normal, double radius, double heigh
 
 	if (!(cy = (t_cylinder *)malloc(sizeof(t_cylinder))))
 		return (0);
+	cy->real_center = center;
 	cy->center = center;
+	cy->real_normal = normal;
 	cy->normal = normal;
 	cy->radius = radius / 2;
 	cy->height = height;
@@ -68,6 +73,7 @@ t_light	*light_point(t_point3 light_origin, t_color3 light_color, double bright_
 
 	if (!(light = (t_light *)malloc(sizeof(t_light))))
 		return (0);
+	light->real_origin = light_origin;
 	light->origin = light_origin;
 	light->light_color = light_color;
 	light->bright_ratio = bright_ratio;
