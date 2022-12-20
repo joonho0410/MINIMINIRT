@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   phong_lighting.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junhjeon <junhjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 21:20:25 by junhjeon          #+#    #+#             */
-/*   Updated: 2022/12/07 17:01:36 by junhjeon         ###   ########.fr       */
+/*   Updated: 2022/12/19 20:16:28 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ t_color3	phong_lighting(t_scene *scene)
 	{
 		if (lights->type == LIGHT_POINT)
 			light_color = vplus(light_color, point_light_get(scene, lights->element));
+		// printf("%f %f %f\n", ((t_light *)lights->element)->origin.x, ((t_light *)lights->element)->origin.y, ((t_light *)lights->element)->origin.z);
 		lights = lights -> next;
 	}
 	light_color = vplus(light_color, scene->ambient);

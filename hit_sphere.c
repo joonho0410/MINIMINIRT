@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit_sphere.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junhjeon <junhjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 17:15:04 by junhjeon          #+#    #+#             */
-/*   Updated: 2022/12/07 20:47:33 by junhjeon         ###   ########.fr       */
+/*   Updated: 2022/12/19 12:11:44 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 t_bool	hit_sphere(t_object *sp, t_ray *ray, t_hit_record *rec)
 {
-	t_sphere *sp2;
+	// t_sphere *sp2;
 	t_vec3	oc;
 	double	a;
 	double	half_b;
@@ -27,7 +27,7 @@ t_bool	hit_sphere(t_object *sp, t_ray *ray, t_hit_record *rec)
 	double	sqrtd;
 	double	root;
 	
-	sp2 = sp->element;
+	// sp2 = sp->element;
 	rec->albedo = sp->albedo;
 	oc = vminus(ray->orig, ((t_sphere *)(sp->element))->center);
 	a = vlength2(ray->dir);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junhjeon <junhjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 19:58:44 by junhjeon          #+#    #+#             */
-/*   Updated: 2022/12/07 20:32:07 by junhjeon         ###   ########.fr       */
+/*   Updated: 2022/12/20 11:59:56 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ struct	s_scene
 	t_object		*world;
 	t_object		*light;
 	t_color3		ambient;
+	t_vec3			c_normal;
 	t_ray			ray;
 	t_hit_record	rec;
 };

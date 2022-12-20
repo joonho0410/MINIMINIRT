@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junhjeon <junhjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 20:02:37 by junhjeon          #+#    #+#             */
-/*   Updated: 2022/12/05 20:37:14 by junhjeon         ###   ########.fr       */
+/*   Updated: 2022/12/18 22:19:36 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ t_vec3      vunit(t_vec3 vec);
 t_vec3      vmin(t_vec3 vec1, t_vec3 vec2);
 void		oadd(t_object **list, t_object *new);
 t_object	*olast(t_object *list);
+t_object	*ofirst(void);
 
 #endif
