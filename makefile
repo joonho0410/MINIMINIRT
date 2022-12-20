@@ -18,7 +18,8 @@ SRCS 	=	./canvas.c\
 			./rotate.c\
 			./scene.c\
 			./test.c\
-			./utils.c
+			./utils.c\
+			./key.c
 
 OBJS 	= ${SRCS:.c=.o}
 INCLUDE	= -I./includes/ -L./mlx -lmlx

@@ -6,13 +6,14 @@
 /*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 10:40:58 by seungsle          #+#    #+#             */
-/*   Updated: 2022/12/19 18:38:05 by seungsle         ###   ########.fr       */
+/*   Updated: 2022/12/20 11:46:00 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx_window.h"
 #include "trace.h"
 #include "print.h"
+#include "key.h"
 
 #define WIN_WIDTH 400
 #define WIN_HEIGHT 300
@@ -113,7 +114,7 @@ void	execute(t_scene *scene, t_mlx_data *data)
 		if (data->mlx.win)
 		{
 			loop(scene, data);
-			// mlx_key_hook(data->mlx.win, listener, (void *)data);
+			mlx_key_hook(data->mlx.win, listener, (void *)data);
 			// mlx_hook(data->mlx.win, 4, (1L << 2), mouse_scroll, (void *)data);
 			mlx_loop(data->mlx.mlx_ptr);
 		}
