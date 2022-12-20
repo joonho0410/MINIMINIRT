@@ -1,0 +1,25 @@
+{
+	"files.associations": {
+		"*.html": "html",
+		"chrono": "c",
+		"parsing.h": "c",
+		"sstream": "c",
+		"scene.h": "c",
+		"utils.h": "c",
+		"structures.h": "c",
+		"parsing_utils.h": "c",
+		"mlx.h": "c",
+		"array": "c",
+		"string": "c",
+		"string_view": "c",
+		"vector": "c",
+		"mlx_window.h": "c",
+		"trace.h": "c",
+		"print.h": "c",
+		"stdio.h": "c",
+		"key.h": "c",
+		"__hash_table": "c",
+		"__string": "c",
+		"locale": "c"
+	}
+}
