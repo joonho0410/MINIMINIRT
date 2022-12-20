@@ -19,6 +19,6 @@
 
 
 void    rotate_world(t_scene *scene, t_object *world);
-void    rotate_sp(t_object *obj, t_vec3 move_p, t_rotate axis, t_rotate_seta point);
-void    rotate_pl(t_object *obj, t_vec3 move_p, t_rotate axis, t_rotate_seta point);
-void    rotate_cy(t_object *obj, t_vec3 move_p, t_rotate axis, t_rotate_seta point);
+void    rotate_sp(t_object *obj, t_vec3 move_p, t_rotate axis, t_rotate point);
+void    rotate_pl(t_object *obj, t_vec3 move_p, t_rotate axis, t_rotate point);
+void    rotate_cy(t_object *obj, t_vec3 move_p, t_rotate axis, t_rotate point);
