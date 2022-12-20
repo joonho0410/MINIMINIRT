@@ -6,7 +6,7 @@
 /*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:27:09 by seungsle          #+#    #+#             */
-/*   Updated: 2022/12/20 20:42:06 by seungsle         ###   ########.fr       */
+/*   Updated: 2022/12/21 07:57:17 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ void	key_3(int keycode, t_mlx_data *data)
 {
 	if (keycode == KEY_ONE)
 	{
-		data->scene->c_normal.z = 1;
+		data->scene->c_normal.z += 0.1;
 		rotate_world(data->scene, data->scene->world->next);
 	}
 	else if (keycode == KEY_TWO)
 	{
-		data->scene->c_normal.z = -1;
+		data->scene->c_normal.z -= 0.1;
 		rotate_world(data->scene, data->scene->world->next);
 	}
 	else if (keycode == KEY_W)
