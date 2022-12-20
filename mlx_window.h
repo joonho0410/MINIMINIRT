@@ -6,7 +6,7 @@
 /*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 10:42:33 by seungsle          #+#    #+#             */
-/*   Updated: 2022/12/19 12:07:46 by seungsle         ###   ########.fr       */
+/*   Updated: 2022/12/20 11:44:42 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,10 @@ struct s_mlx_data {
 };
 
 void	execute(t_scene *scene, t_mlx_data *data);
+void	loop(t_scene *scene, t_mlx_data *data);
+void	pxl_to_img(t_scene *scene, t_mlx_data *data);
+void	put_color(t_mlx_data *data, t_img *img, int x, int y);
+void	error_detected(int error);
+void	ft_putstr_fd(char *s, int fd);
 
 #endif
