@@ -6,7 +6,7 @@
 /*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 18:20:26 by junhjeon          #+#    #+#             */
-/*   Updated: 2022/12/20 20:15:00 by seungsle         ###   ########.fr       */
+/*   Updated: 2022/12/20 20:57:39 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,13 @@ void debugPrintVec3(t_vec3 *new_point, char *str) {
 // z -> camera->normal;
 // x -> horiz;
 // y -> vup;
-void    rotate_world(t_scene *scene, t_object *world, t_parse *parse)
+void    rotate_world(t_scene *scene, t_object *world)
 {
     // debugPrintVec3(&scene->camera.orig, "camera orig"); 
     t_vec3  move_p = vec3(-(scene->camera.orig.x), -(scene->camera.orig.y), -(scene->camera.orig.z));
     // debugPrintVec3(&move_p, "move_p");
-    t_vec3  camera_normal = scene->c_normal; // 카메라좌표계의 z축. -> (0, 0, -1); camera->normal (1, 1, 0 ) -> (0, 0, 1);
+    t_vec3  camera_normal = vunit(scene->c_normal); // 카메라좌표계의 z축. -> (0, 0, -1); camera->normal (1, 1, 0 ) -> (0, 0, 1);
+    // debugPrintVec3(&camera_normal, "camera normal");
     t_vec3  rdup = vec3(0, 1, 0);
     if (camera_normal.y != 0.0 && (camera_normal.x == 0 && camera_normal.z == 0))
         rdup = vec3(0, 0, 1);
@@ -52,7 +53,7 @@ void    rotate_world(t_scene *scene, t_object *world, t_parse *parse)
     //printf("@pt : %f, %f , %f , %f\n", setas.cosp, setas.sinp, setas.cost, setas.sint);
 
     t_rotate    r;
-    t_rotate    axis;
+    // t_rotate    axis;
     // r.x = vec3(setas.cosp, setas.sinp, 0);
     // r.y = vec3(-(setas.sinp * setas.sint), setas.cosp * setas.sint, -setas.cost);
     // r.z = vec3(-(setas.sinp * setas.cost), setas.cosp * setas.cost, setas.sint);
@@ -93,8 +94,8 @@ void    rotate_sp(t_object *obj, t_vec3 move_p, t_rotate axis, t_rotate r)
     t_sphere    *sp;
     t_vec3      new_point;
 
+    (void)r;
     (void)axis;
-    (void)seta;
     sp = obj->element;
     sp->center = vplus(sp->center, move_p);
     new_point.x = vdot(axis.x, sp->center);
@@ -109,7 +110,7 @@ void    rotate_cy(t_object *obj, t_vec3 move_p, t_rotate axis, t_rotate r)
     t_vec3      new_normal;
     t_vec3      new_point;
 
-    (void)seta;
+    (void)r;
     cy = obj->element;
     // debugPrintVec3(&cy->center);
     // new_normal = vmult(axis.x, vunit(cy->normal).x);
@@ -140,7 +141,7 @@ void    rotate_pl(t_object *obj, t_vec3 move_p, t_rotate axis, t_rotate r)
     t_vec3  new_normal;
     t_vec3  new_point;
 
-    (void)seta;
+    (void)r;
     pl = obj->element;
     pl->center = vplus(pl->center, move_p);
     //printf("normal : %f , %f , %f\n", pl->normal.x, pl->normal.y, pl->normal.z);

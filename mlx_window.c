@@ -6,7 +6,7 @@
 /*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 10:40:58 by seungsle          #+#    #+#             */
-/*   Updated: 2022/12/20 11:46:00 by seungsle         ###   ########.fr       */
+/*   Updated: 2022/12/20 20:37:39 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "trace.h"
 #include "print.h"
 #include "key.h"
+#include "rotate.h"
 
 #define WIN_WIDTH 400
 #define WIN_HEIGHT 300

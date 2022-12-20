@@ -6,12 +6,13 @@
 /*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:27:09 by seungsle          #+#    #+#             */
-/*   Updated: 2022/12/20 12:09:19 by seungsle         ###   ########.fr       */
+/*   Updated: 2022/12/20 20:42:06 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "key.h"
 #include "mlx_window.h"
+#include "rotate.h"
 
 void	key_1(int keycode)
 {
@@ -43,39 +44,24 @@ void	key_3(int keycode, t_mlx_data *data)
 	if (keycode == KEY_ONE)
 	{
 		data->scene->c_normal.z = 1;
+		rotate_world(data->scene, data->scene->world->next);
 	}
 	else if (keycode == KEY_TWO)
 	{
 		data->scene->c_normal.z = -1;
+		rotate_world(data->scene, data->scene->world->next);
 	}
 	else if (keycode == KEY_W)
 	{
-		if (data->scene->c_normal.y + 0.1 > 1)
-			data->scene->c_normal.y = 1;
-		else
-			data->scene->c_normal.y += 0.1;
+		data->scene->c_normal.y += 0.1;
+		rotate_world(data->scene, data->scene->world->next);
 	}
 	else if (keycode == KEY_S)
-	{
-		if (data->scene->c_normal.y - 0.1 < -1)
-			data->scene->c_normal.y = -1;
-		else
-			data->scene->c_normal.y -= 0.1;
-	}
+		data->scene->c_normal.y -= 0.1;
 	else if (keycode == KEY_A)
-	{
-		if (data->scene->c_normal.x + 0.1 > 1)
-			data->scene->c_normal.x = 1;
-		else
-			data->scene->c_normal.x += 0.1;
-	}
+		data->scene->c_normal.x += 0.1;
 	else if (keycode == KEY_D)
-	{
-		if (data->scene->c_normal.x - 0.1 < -1)
-			data->scene->c_normal.x = -1;
-		else
-			data->scene->c_normal.x -= 0.1;
-	}
+		data->scene->c_normal.x -= 0.1;
 	return ;
 }
 

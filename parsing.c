@@ -6,7 +6,7 @@
 /*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 15:33:15 by seungsle          #+#    #+#             */
-/*   Updated: 2022/12/20 12:00:46 by seungsle         ###   ########.fr       */
+/*   Updated: 2022/12/20 20:33:11 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -421,7 +421,7 @@ t_scene *scene_init(t_parse *parse)
 	scene->light = lights;
 	divide_3(&parse->A);
 	scene->ambient = vmult(color3(1, 1, 1), 0.5); // 이게 맞나...??
-	rotate_world(scene, parse->ob_p->next, parse);
+	rotate_world(scene, parse->ob_p->next);
 	return (scene);
 }
 
