@@ -6,7 +6,7 @@
 /*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 18:20:26 by junhjeon          #+#    #+#             */
-/*   Updated: 2022/12/19 20:16:10 by seungsle         ###   ########.fr       */
+/*   Updated: 2022/12/20 20:16:27 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,27 @@ void mlx_window_init(t_scene *scene, t_mlx_data *mlx_data)
     mlx_data->rgb.g = 0;
     mlx_data->rgb.b = 0;
     mlx_data->scene = scene;
+	// t_scene		*scene;
+	// t_object	*world;
+	// t_object	*lights;
+	// double		ka;
+
+	// if (!(scene = (t_scene *)malloc(sizeof(t_scene))))
+	// 	return (0);
+	// scene->canvas = canvas(400, 300);
+	// scene->camera = camera(&scene->canvas, point3(0, 0, 50));
+	// //world = object(SP, sphere(point3(0, 0, -20), 6), color3(0, 0, 1));
+    // world = object(PL, plain(point3(0, 0, -20), point3(0, 0, 1)), color3(1, 0.3, 0.3)); // world 에 구1 추가
+    // //oadd(&world, object(SP, sphere(point3(0, 0, -10), 10), color3(0.3, 0.3, 1))); // world 에 구2 추가
+    // oadd(&world, object(CY, cylinder(point3(0, 0, -10), vec3(0, 0, 1), 10, 10), color3(0.3, 0.3, 1))); // world 에 구3 추가
+	// //oadd(&world, object(SP, cylinder(point3(0, 0, -12), vec3(0, 1, 0), 2, 2), color3(0, 0, 0.5)));
+    // scene->world = world;
+	// lights = object(LIGHT_POINT, light_point(point3(0, 0, 30), color3(1, 1, 1), 0.5), color3(0, 0, 0));
+	// scene->light = lights;
+	// ka = 0.5;
+	// scene->ambient = vmult(color3(1, 1, 1), ka);
+    // rotate_world(scene, world);
+	// return (scene);
 }
 
 int main(int argc, char **argv)

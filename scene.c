@@ -47,6 +47,7 @@ t_camera    camera(t_canvas *canvas, t_parse *parse)
     // 왼쪽 아래 코너점 좌표, origin - horizontal / 2 - vertical / 2 - vec3(0,0,focal_length)
     cam.left_bottom = vminus(vminus(vminus(cam.orig, vdivide(cam.horizontal, 2)),
                                 vdivide(cam.vertical, 2)), vec3(0, 0, focal_len));
+    //cam.left_bottom = vplus(cam.left_bottom, vec3(0.5,0.5,0));
     /*t_point3    view_center = vplus(orig, vunit(nv));
     cam.left_bottom = vplus(view_center, vmult(horiz, cam.viewport_w / 2));
     cam.left_bottom = vminus(cam.left_bottom, vmult(vup, cam.viewport_h / 2));

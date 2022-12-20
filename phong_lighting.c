@@ -12,6 +12,10 @@
 
 #include "trace.h"
 
+void debugPrintVec4(t_vec3 *new_point, char *str) {
+    printf("@%s : %f , %f , %f\n",str, new_point->x, new_point->y, new_point->z);
+}
+
 t_vec3	reflect(t_vec3 v, t_vec3 n)
 {
 	return (vminus(v, vmult(n, vdot(v, n) * 2)));
@@ -67,7 +71,6 @@ t_color3	phong_lighting(t_scene *scene)
 		// printf("%f %f %f\n", ((t_light *)lights->element)->origin.x, ((t_light *)lights->element)->origin.y, ((t_light *)lights->element)->origin.z);
 		lights = lights -> next;
 	}
-	
 	light_color = vplus(light_color, scene->ambient);
 	return (vmin(vmult_(light_color, scene->rec.albedo), color3(1, 1, 1)));
 }
