@@ -6,7 +6,7 @@
 /*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 19:58:44 by junhjeon          #+#    #+#             */
-/*   Updated: 2022/12/20 11:59:56 by seungsle         ###   ########.fr       */
+/*   Updated: 2022/12/21 23:21:25 by junhjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,14 @@ typedef struct	s_light	t_light;
 typedef struct	s_scene t_scene;
 typedef struct	s_rotate t_rotate;
 typedef struct	s_rotate_seta t_rotate_seta;
+typedef struct	s_cal_cy_cap t_cal_cy_cap;
+typedef struct	s_cal_cy t_cal_cy;
+typedef struct	s_cal_sp t_cal_sp;
+typedef struct	s_light_var t_light_var;
+typedef struct	s_rotate_var t_rotate_var;
+
+
+
 typedef int	t_bool;
 
 # define FALSE 0
@@ -155,5 +163,60 @@ struct	s_rotate_seta
 	double	cost;
 };
 
+struct s_cal_cy_cap
+{
+	double	root;
+	double	nom;
+	double	denom;
+	double	diam;
+};
+
+struct s_cal_cy
+{
+	double	a;
+	double	half_b;
+	double	c;
+	double	dis;
+	double	root;
+	double	sqrtd;
+};
+
+struct s_cal_sp
+{
+	double	a;
+	double	half_b;
+	double	c;
+	double	dis;
+	double	sqrtd;
+	double	root;
+	t_vec3	oc;
+};
+
+struct	s_light_var
+{
+	double		kd;
+	double		spec;
+	double		ksn;
+	double		ks;
+	double		brightness;
+	double		light_len;
+	t_color3	diffuse;
+	t_vec3		light_dir;
+	t_color3	specular;
+	t_vec3		view_dir;
+	t_vec3		reflect_dir;
+	t_ray		light_ray;
+};
+
+struct	s_rotate_var
+{
+	t_vec3		move_p;
+	t_vec3		camera_normal;
+	t_vec3		rdup;
+	t_vec3		horiz;
+	t_vec3		vup;
+	t_point3	newlights;
+	t_light		*lights;
+};
 
 #endif

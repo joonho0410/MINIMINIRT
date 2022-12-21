@@ -5,6 +5,8 @@ CFLAG	= -Werror -Wall -Wextra
 FFLAG	= -framework OpenGL -framework AppKit
 SRCS 	=	./srcs/canvas.c\
 			./srcs/hit_sphere.c\
+			./srcs/hit_cylinder.c\
+			./srcs/hit_plain.c\
 			./srcs/hit.c\
 			./srcs/mlx_set/mlx_window.c\
 			./srcs/mlx_set/mlx_window_error.c\
@@ -32,6 +34,9 @@ SRCS 	=	./srcs/canvas.c\
 			./srcs/scene.c\
 			./srcs/main.c\
 			./srcs/utils.c\
+			./srcs/utils2.c\
+			./srcs/utils3.c\
+			./srcs/utils4.c\
 			./srcs/key.c
 
 OBJS 	= ${SRCS:.c=.o}

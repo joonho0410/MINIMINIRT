@@ -6,7 +6,7 @@
 /*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 17:12:01 by junhjeon          #+#    #+#             */
-/*   Updated: 2022/12/21 08:08:35 by seungsle         ###   ########.fr       */
+/*   Updated: 2022/12/21 22:02:08 by junhjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ t_object	*object(t_object_type type, void *element, t_color3 albedo)
 {
 	t_object	*new;
 
-	if (!(new = (t_object *)malloc(sizeof(t_object))))
+	new = (t_object *)malloc(sizeof(t_object));
+	if (!new)
 		return (0);
 	new->type = type;
 	new->element = element;
@@ -28,9 +29,10 @@ t_object	*object(t_object_type type, void *element, t_color3 albedo)
 
 t_sphere	*sphere(t_point3 center, double radius)
 {
-	t_sphere *sp;
+	t_sphere	*sp;
 
-	if (!(sp = (t_sphere *)malloc(sizeof(t_sphere))))
+	sp = (t_sphere *)malloc(sizeof(t_sphere));
+	if (!sp)
 		return (0);
 	sp->real_center = center;
 	sp->center = center;
@@ -43,7 +45,8 @@ t_plain	*plain(t_point3 center, t_vec3 normal)
 {
 	t_plain	*pl;
 
-	if (!(pl = (t_plain *)malloc(sizeof(t_plain))))
+	pl = (t_plain *)malloc(sizeof(t_plain));
+	if (!pl)
 		return (0);
 	pl->real_center = center;
 	pl->center = center;
@@ -52,11 +55,13 @@ t_plain	*plain(t_point3 center, t_vec3 normal)
 	return (pl);
 }
 
-t_cylinder	*cylinder(t_point3 center, t_vec3 normal, double radius, double height)
+t_cylinder	*cylinder(t_point3 center, t_vec3 normal, \
+		double radius, double height)
 {
-	t_cylinder *cy;
+	t_cylinder	*cy;
 
-	if (!(cy = (t_cylinder *)malloc(sizeof(t_cylinder))))
+	cy = (t_cylinder *)malloc(sizeof(t_cylinder));
+	if (!cy)
 		return (0);
 	cy->real_center = center;
 	cy->center = center;
@@ -67,11 +72,13 @@ t_cylinder	*cylinder(t_point3 center, t_vec3 normal, double radius, double heigh
 	return (cy);
 }
 
-t_light	*light_point(t_point3 light_origin, t_color3 light_color, double bright_ratio)
+t_light	*light_point(t_point3 light_origin, \
+		t_color3 light_color, double bright_ratio)
 {
 	t_light	*light;
 
-	if (!(light = (t_light *)malloc(sizeof(t_light))))
+	light = (t_light *)malloc(sizeof(t_light));
+	if (!light)
 		return (0);
 	light->real_origin = light_origin;
 	light->origin = light_origin;

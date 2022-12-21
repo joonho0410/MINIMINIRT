@@ -6,15 +6,11 @@
 /*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 21:20:25 by junhjeon          #+#    #+#             */
-/*   Updated: 2022/12/21 08:08:23 by seungsle         ###   ########.fr       */
+/*   Updated: 2022/12/21 22:05:56 by junhjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/trace.h"
-
-void debugPrintVec4(t_vec3 *new_point, char *str) {
-    printf("@%s : %f , %f , %f\n",str, new_point->x, new_point->y, new_point->z);
-}
 
 t_vec3	reflect(t_vec3 v, t_vec3 n)
 {
@@ -23,37 +19,26 @@ t_vec3	reflect(t_vec3 v, t_vec3 n)
 
 t_color3	point_light_get(t_scene *scene, t_light *light)
 {
-	t_color3	diffuse;
-	t_vec3		light_dir;
-	double		kd;
+	t_light_var	var;
 
-	t_color3	specular;
-	t_vec3		view_dir;
-	t_vec3		reflect_dir;
-	double		spec;
-	double		ksn;
-	double		ks;
-	double		brightness;
-	double		light_len;
-	t_ray		light_ray;
-
-
-	light_dir = vminus(light->origin, scene->rec.p);
-	light_len = vlength(light_dir);
-	light_ray = ray(vplus(scene->rec.p, vmult(scene->rec.normal, EPSILON)), light_dir);
-	if (in_shadow(scene->world, light_ray, light_len))
+	var.light_dir = vminus(light->origin, scene->rec.p);
+	var.light_len = vlength(var.light_dir);
+	var.light_ray = ray(vplus(scene->rec.p, vmult(scene->rec.normal, \
+					EPSILON)), var.light_dir);
+	if (in_shadow(scene->world, var.light_ray, var.light_len))
 		return (color3(0, 0, 0));
-	light_dir = vunit(light_dir);
-	kd =fmax(vdot(scene->rec.normal, light_dir), 0.0);
-	diffuse = vmult(light->light_color, kd);
-	view_dir = vunit(vmult(scene->ray.dir, -1));
-    reflect_dir = reflect(vmult(light_dir, -1), scene->rec.normal);
-    ksn = 64; // shininess value
-    ks = 0.5; // specular strength
-    spec = pow(fmax(vdot(view_dir, reflect_dir), 0.0), ksn);
-    specular = vmult(vmult(light->light_color, ks), spec);
-	brightness = light->bright_ratio * LUMEN; // 기준 광속/광량을 정의한 매크로
-    return (vmult(vplus(vplus(scene->ambient, diffuse), specular), brightness));
+	var.light_dir = vunit(var.light_dir);
+	var.kd = fmax(vdot(scene->rec.normal, var.light_dir), 0.0);
+	var.diffuse = vmult(light->light_color, var.kd);
+	var.view_dir = vunit(vmult(scene->ray.dir, -1));
+	var.reflect_dir = reflect(vmult(var.light_dir, -1), scene->rec.normal);
+	var.ksn = 64;
+	var.ks = 0.5;
+	var.spec = pow(fmax(vdot(var.view_dir, var.reflect_dir), 0.0), var.ksn);
+	var.specular = vmult(vmult(light->light_color, var.ks), var.spec);
+	var.brightness = light->bright_ratio * LUMEN;
+	return (vmult(vplus(vplus(scene->ambient, var.diffuse), \
+	var.specular), var.brightness));
 }
 
 t_color3	phong_lighting(t_scene *scene)
@@ -63,12 +48,11 @@ t_color3	phong_lighting(t_scene *scene)
 
 	light_color = color3(0, 0, 0);
 	lights = scene->light;
-	
 	while (lights)
 	{
 		if (lights->type == LIGHT_POINT)
-			light_color = vplus(light_color, point_light_get(scene, lights->element));
-		// printf("%f %f %f\n", ((t_light *)lights->element)->origin.x, ((t_light *)lights->element)->origin.y, ((t_light *)lights->element)->origin.z);
+			light_color = vplus(light_color, point_light_get(scene, \
+						lights->element));
 		lights = lights -> next;
 	}
 	light_color = vplus(light_color, scene->ambient);
