@@ -20,6 +20,9 @@
 		"key.h": "c",
 		"__hash_table": "c",
 		"__string": "c",
-		"locale": "c"
+		"locale": "c",
+		"rotate.h": "c",
+		"mlx_int.h": "c",
+		"unistd.h": "c"
 	}
 }
