@@ -6,27 +6,27 @@
 /*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 10:42:33 by seungsle          #+#    #+#             */
-/*   Updated: 2022/12/21 08:47:43 by seungsle         ###   ########.fr       */
+/*   Updated: 2022/12/22 12:45:31 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MLX_WINDOW_H_
-# define MLX_WINDOW_H_
+#ifndef MLX_WINDOW_H
+# define MLX_WINDOW_H
 
 # define MLX_INIT_ERROR			-1
 # define MLX_NEW_WINDOW_ERROR	-2
 # define MLX_NEW_IMAGE_ERROR	-3
 # define MLX_GET_DATA_ADDR_ERROR	-4
 
-#include "../mlx/mlx.h"
-#include "./scene.h"
-#include <unistd.h>
+# include "../mlx/mlx.h"
+# include "./scene.h"
+# include <unistd.h>
 
-typedef struct s_mlx_data t_mlx_data;
-typedef struct s_img t_img;
-typedef struct s_mlx t_mlx;
-typedef struct s_rgb t_rgb;
-typedef unsigned char			t_un_char;
+typedef struct s_mlx_data	t_mlx_data;
+typedef struct s_img		t_img;
+typedef struct s_mlx		t_mlx;
+typedef struct s_rgb		t_rgb;
+typedef unsigned char		t_un_char;
 
 struct s_rgb
 {

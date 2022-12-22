@@ -6,18 +6,21 @@
 /*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:26:56 by seungsle          #+#    #+#             */
-/*   Updated: 2022/12/20 11:50:49 by seungsle         ###   ########.fr       */
+/*   Updated: 2022/12/22 12:32:57 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KEY_H_
-# define KEY_H_
+#ifndef KEY_H
+# define KEY_H
 
 # define KEY_ESC				53
 
 # define KEY_ONE				18
 # define KEY_TWO				19
 # define KEY_THREE				20
+# define KEY_FOUR				21
+# define KEY_FIVE				22
+# define KEY_SIX				23
 
 # define KEY_LEFT				123
 # define KEY_RIGHT				124

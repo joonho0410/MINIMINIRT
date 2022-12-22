@@ -6,7 +6,7 @@
 /*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 15:33:15 by seungsle          #+#    #+#             */
-/*   Updated: 2022/12/21 08:58:02 by seungsle         ###   ########.fr       */
+/*   Updated: 2022/12/22 12:42:11 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ t_scene	*parsing(int argc, char **argv, t_parse *parse)
 
 	ob_p = ofirst();
 	parse->ob_p = ob_p;
-	parse->A.updated = FALSE;
-	parse->C.updated = FALSE;
-	parse->L.updated = FALSE;
+	parse->a.updated = FALSE;
+	parse->c.updated = FALSE;
+	parse->l.updated = FALSE;
 	valid_argument(argc);
 	valid_file(argv[1]);
 	valid_contents(open_and_read(argv[1]), parse);

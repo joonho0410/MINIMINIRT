@@ -6,7 +6,7 @@
 /*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 08:24:39 by seungsle          #+#    #+#             */
-/*   Updated: 2022/12/21 09:00:12 by seungsle         ###   ########.fr       */
+/*   Updated: 2022/12/22 12:42:51 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ t_scene	*scene_init(t_parse *parse)
 	scene->canvas = canvas(400, 300);
 	scene->camera = camera(&scene->canvas, parse);
 	scene->world = parse->ob_p->next;
-	scene->c_normal = parse->C.normal;
-	lights = object(LIGHT_POINT, light_point(parse->L.light_point, \
-					color3(1, 1, 1), parse->L.bright_rate), \
+	scene->c_normal = parse->c.normal;
+	lights = object(LIGHT_POINT, light_point(parse->l.light_point, \
+					color3(1, 1, 1), parse->l.bright_rate), \
 					zero_to_one(color3(0, 0, 0)));
 	scene->light = lights;
-	divide_3(&parse->A);
+	divide_3(&parse->a);
 	scene->ambient = vmult(color3(1, 1, 1), 0.5);
 	rotate_world(scene, parse->ob_p->next);
 	return (scene);

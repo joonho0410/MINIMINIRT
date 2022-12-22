@@ -6,7 +6,7 @@
 /*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:27:09 by seungsle          #+#    #+#             */
-/*   Updated: 2022/12/21 21:57:40 by junhjeon         ###   ########.fr       */
+/*   Updated: 2022/12/22 12:25:55 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,18 @@ void	key_3(int keycode, t_mlx_data *data)
 	return ;
 }
 
+void	key_4(int keycode, t_mlx_data *data)
+{
+	if (keycode == KEY_THREE)
+		((t_light *)data->scene->light->element)->real_origin.x += 1;
+	else if (keycode == KEY_FOUR)
+		((t_light *)data->scene->light->element)->real_origin.y += 1;
+	else if (keycode == KEY_FIVE)
+		((t_light *)data->scene->light->element)->real_origin.x -= 1;
+	else if (keycode == KEY_SIX)
+		((t_light *)data->scene->light->element)->real_origin.y -= 1;
+}
+
 int	listener(int keycode, void *param)
 {
 	t_mlx_data	*data;
@@ -76,6 +88,7 @@ int	listener(int keycode, void *param)
 	key_1(keycode);
 	key_2(keycode, data);
 	key_3(keycode, data);
+	key_4(keycode, data);
 	loop(data->scene, data);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 08:30:31 by seungsle          #+#    #+#             */
-/*   Updated: 2022/12/21 09:05:28 by seungsle         ###   ########.fr       */
+/*   Updated: 2022/12/22 12:42:51 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	parse_ambient(char *src, t_parse *parse)
 {
-	if (parse->A.updated == FALSE)
+	if (parse->a.updated == FALSE)
 	{
-		parse->A.rate = get_rate(src);
-		parse->A.color = get_color(skip_whitespace(src));
-		parse->A.updated = TRUE;
+		parse->a.rate = get_rate(src);
+		parse->a.color = get_color(skip_whitespace(src));
+		parse->a.updated = TRUE;
 	}
 	else
 		exit_print();
@@ -28,14 +28,14 @@ void	parse_camera(char *src, t_parse *parse)
 {
 	char	*tmp;
 
-	if (parse->C.updated == FALSE)
+	if (parse->c.updated == FALSE)
 	{
-		parse->C.view_point = get_point(src);
+		parse->c.view_point = get_point(src);
 		tmp = skip_whitespace(src);
-		parse->C.normal = get_vector(tmp);
+		parse->c.normal = get_vector(tmp);
 		tmp = skip_whitespace(tmp);
-		parse->C.FOV = get_fov(tmp);
-		parse->C.updated = TRUE;
+		parse->c.fov = get_fov(tmp);
+		parse->c.updated = TRUE;
 	}
 	else
 		exit_print();
@@ -43,11 +43,11 @@ void	parse_camera(char *src, t_parse *parse)
 
 void	parse_light(char *src, t_parse *parse)
 {
-	if (parse->L.updated == FALSE)
+	if (parse->l.updated == FALSE)
 	{
-		parse->L.light_point = get_point(src);
-		parse->L.bright_rate = get_rate(skip_whitespace(src));
-		parse->L.updated = TRUE;
+		parse->l.light_point = get_point(src);
+		parse->l.bright_rate = get_rate(skip_whitespace(src));
+		parse->l.updated = TRUE;
 	}
 	else
 		exit_print();
