@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_window.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: seungsle <seungsle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 10:40:58 by seungsle          #+#    #+#             */
-/*   Updated: 2022/12/21 09:09:36 by seungsle         ###   ########.fr       */
+/*   Updated: 2022/12/22 15:00:23 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@
 
 #define WIN_WIDTH 400
 #define WIN_HEIGHT 300
+
+int	press_x(t_mlx_data *ptr)
+{
+	mlx_destroy_window(ptr->mlx.mlx_ptr, ptr->mlx.win);
+	exit(0);
+	return (0);
+}
 
 void	put_color(t_mlx_data *data, t_img *img, int x, int y)
 {
@@ -90,6 +97,7 @@ void	execute(t_scene *scene, t_mlx_data *data)
 		{
 			loop(scene, data);
 			mlx_key_hook(data->mlx.win, listener, (void *)data);
+			mlx_hook(data->mlx.win, 17, 0, &press_x, data);
 			mlx_loop(data->mlx.mlx_ptr);
 		}
 		else

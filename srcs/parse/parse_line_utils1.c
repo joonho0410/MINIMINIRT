@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line_utils1.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: seungsle <seungsle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 08:28:26 by seungsle          #+#    #+#             */
-/*   Updated: 2022/12/21 09:04:05 by seungsle         ###   ########.fr       */
+/*   Updated: 2022/12/22 15:36:43 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	slice_set(char *src, t_set3 *set3)
 	tmp1 = find_char(src, ',');
 	tmp2 = find_char(tmp1 + 1, ',');
 	i = 0;
+	if (tmp2 == NULL)
+		exit_print();
 	while (1)
 	{
 		if (!tmp2[i] || is_whitespace(tmp2[i]))

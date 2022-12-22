@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line_utils2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: seungsle <seungsle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 08:28:50 by seungsle          #+#    #+#             */
-/*   Updated: 2022/12/21 09:05:30 by seungsle         ###   ########.fr       */
+/*   Updated: 2022/12/22 14:51:58 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ t_color3	get_color(char *src)
 	color.x = ft_atol(set3.src1);
 	color.y = ft_atol(set3.src2);
 	color.z = ft_atol(set3.src3);
+	free(set3.src1);
+	free(set3.src2);
+	free(set3.src3);
 	if (color.x < 0 || color.x > 255 || color.y < 0 || color.y > 255 || \
 		color.z < 0 || color.z > 255)
 		exit_print();
@@ -49,6 +52,9 @@ t_point3	get_point(char *src)
 	point.x = ft_atod(set3.src1);
 	point.y = ft_atod(set3.src2);
 	point.z = ft_atod(set3.src3);
+	free(set3.src1);
+	free(set3.src2);
+	free(set3.src3);
 	return (point);
 }
 
@@ -62,6 +68,9 @@ t_vec3	get_vector(char *src)
 	vec.x = ft_atod(set3.src1);
 	vec.y = ft_atod(set3.src2);
 	vec.z = ft_atod(set3.src3);
+	free(set3.src1);
+	free(set3.src2);
+	free(set3.src3);
 	if (vec.x < -1.0 || vec.x > 1.0 || vec.y < -1.0 || vec.y > 1.0 || \
 		vec.z < -1.0 || vec.z > 1.0)
 		exit_print();

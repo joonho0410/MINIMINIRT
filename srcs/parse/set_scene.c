@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_scene.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: seungsle <seungsle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 08:24:39 by seungsle          #+#    #+#             */
-/*   Updated: 2022/12/22 12:42:51 by seungsle         ###   ########.fr       */
+/*   Updated: 2022/12/22 15:11:59 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_scene	*scene_init(t_parse *parse)
 					zero_to_one(color3(0, 0, 0)));
 	scene->light = lights;
 	divide_3(&parse->a);
-	scene->ambient = vmult(color3(1, 1, 1), 0.5);
+	scene->ambient = vmult(parse->a.color, parse->a.rate);
 	rotate_world(scene, parse->ob_p->next);
 	return (scene);
 }

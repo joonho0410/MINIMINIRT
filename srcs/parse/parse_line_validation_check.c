@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line_validation_check.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seungsle <seungsle@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: seungsle <seungsle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 08:26:39 by seungsle          #+#    #+#             */
-/*   Updated: 2022/12/21 09:00:52 by seungsle         ###   ########.fr       */
+/*   Updated: 2022/12/22 15:37:21 by seungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	valid_decimal(char *src)
 	int	i;
 
 	i = 0;
+	if (ft_strlen(src) == 0)
+		exit_print();
 	if (src[i] == '-' || src[i] == '+')
 		i++;
 	if (is_whitespace(src[i]))
@@ -53,6 +55,8 @@ void	valid_digit(char *src)
 	int	i;
 
 	i = 0;
+	if (ft_strlen(src) == 0)
+		exit_print();
 	if (src[i] == '-' || src[i] == '+')
 		i++;
 	if (is_whitespace(src[i]))
